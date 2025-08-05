@@ -1,0 +1,13 @@
+const express = require('express');
+const router = express.Router();
+const controller = require('../controllers/mainNotificationController');
+
+router.get('/render/:uniqueid', controller.renderNotifications);
+
+// Save new notification
+router.post('/save', controller.saveNotification);
+
+// Fetch notifications as JSON
+router.get('/:uniqueid', controller.getByUniqueId);
+
+module.exports = router;

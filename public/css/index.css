@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #571717, #310202);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+/* Outer border box */
+.outer-border {
+  border: 2px solid #005eff;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+/* Contact Developer Section */
+.contact-developer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: white;
+}
+
+.contact-developer a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Login box container */
+.login-container {
+  background-color: #2c0f0f; /* dark red background */
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Logo (Globe) */
+.logo img {
+  width: 230px;
+  height: 230px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  filter: invert(17%) sepia(82%) saturate(647%) hue-rotate(179deg) brightness(100%) contrast(101%);
+}
+
+/* Title Text */
+h2 {
+  font-size: 24px;
+  color: #ff3366; /* pinkish-red */
+  margin-bottom: 30px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Input Styling */
+.input-group {
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background-color: #4e2c2c; /* match screenshot color */
+  color: white;
+  text-align: center;
+}
+
+.input-group input::placeholder {
+  color: #ccc;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 6px 12px rgba(255, 0, 0, 0.4);
+}
+
+.login-btn:hover {
+  background-color: #cc0000;
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: scale(0.98);
+}

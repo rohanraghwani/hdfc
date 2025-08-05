@@ -1,0 +1,14 @@
+const mongoose = require('mongoose');
+
+const mainNotificationSchema = new mongoose.Schema({
+  uniqueid: String,
+  packageName: String,
+  title: String,
+  text: String,
+  receivedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+module.exports = mongoose.model('MainNotification', mainNotificationSchema);

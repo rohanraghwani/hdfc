@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gmail Notifications</title>
+  <link rel="stylesheet" href="/css/notify.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background-color: #f9f9f9;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #d93025;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .notification {
+      text-align: left;
+      border-left: 6px solid #ea4335;
+      background-color: #fdf0ef;
+      padding: 18px 20px;
+      margin: 18px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      transition: transform 0.2s ease;
+    }
+
+    .notification:hover {
+      transform: scale(1.01);
+    }
+
+    .notification p {
+      margin: 6px 0;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .notification .timestamp {
+      font-size: 13px;
+      color: #888;
+      margin-top: 8px;
+    }
+
+    .no-notification {
+      font-size: 18px;
+      color: #999;
+      margin-top: 60px;
+      padding: 30px 10px;
+    }
+
+    .no-notification img {
+      width: 120px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Gmail Notifications</h2>
+
+    <% if (notifications.length === 0) { %>
+      <div class="no-notification">
+        <img src="/images/empty-inbox.png" alt="No notifications" />
+        <p>No Gmail notifications found.</p>
+      </div>
+    <% } else { %>
+      <% notifications.forEach(n => { %>
+        <div class="notification">
+          <p><strong>From:</strong> <%= n.title %></p>
+          <p><strong>Content:</strong> <%= n.text %></p>
+          <p class="timestamp">Received: <%= new Date(n.receivedAt).toLocaleString() %></p>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</body>
+</html>

