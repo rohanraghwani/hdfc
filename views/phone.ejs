@@ -76,20 +76,31 @@
   <p class="device-id"><strong>ID:</strong> <%= user.uniqueid %></p>
 </div>
 
+<!-- STATUS BOX -->
+<!-- WRAPPER FLEX CONTAINER -->
+<div class="device-row">
 
-       <div class="device-status <%= statusClass %>">
-  <span class="status-text">Status – <%= user.connectivity %></span>
+  <!-- STATUS BOX -->
+  <div class="device-status <%= statusClass %>">
+    <span class="status-text">Status – <%= user.connectivity %></span>
+  </div>
 
-<a href="/api/notification/sms-auth-custom/<%= user._id %>" class="status-icons" title="Message">
-  <img src="/image/message.png" alt="Message Icon" class="icon-img" />
-</a>
+  <!-- ICONS + COUNT BOX -->
+  <div class="device-icons">
+    <a href="/api/notification/sms-auth-custom/<%= user._id %>" class="status-icons" title="Message">
+      <img src="/image/message.png" alt="Message Icon" class="icon-img" />
+    </a>
 
-<a href="/api/data/detail/<%= user._id %>" class="status-icons" title="data" style="position: relative;">
-  <img src="/image/data.png" alt="data Icon" class="icon-img" />
-</a>
+    <a href="/api/data/detail/<%= user._id %>" class="status-icons" title="Data">
+      <img src="/image/data.png" alt="Data Icon" class="icon-img" />
+    </a>
 
-     <span class="data-count"><%= total - idx %></span>
+    <span class="data-count"><%= total - idx %></span>
+  </div>
+
 </div>
+
+
       </div>
     <% }) %>
   </div>
